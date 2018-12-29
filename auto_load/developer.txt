@@ -1,0 +1,29 @@
+*create composer.json
+{
+	"autoload":{
+		"classmap":[
+			"app/models"
+		]
+	}
+}
+*composer dump-autoload -o
+- autoloads class on the models folder
+
+*what will we do if we need to autoload any new folder on app(eg: app/uv), we need to manually add on classmap, here comes PSR4.
+
+*
+1.PSR-4 standard requires of you a strict filesystem structure based on namespaces. Say you have an app in src directory with App namespace, then all sub-namespaces will mirror subdirectories and class names will be the same as file names without the .php extension.
+The autoloader then "knows" where to look for the class of a certain fully qualified name and therefore doesn't require the dump-autoload command to sniff files for classes.
+
+2.On the other hand, classmap autoloading does not require you to have almost any certain file or directory structure, it will recursively go through .php and .inc files in specified directories and files and sniff for classes in them.
+Any new class then must be added to that list by running composer dump-autoload command.
+
+* \<NamespaceName>(\<SubNamespaceNames>)*\<ClassName>
+The fully qualified class name MUST have a top-level namespace name, also known as a “vendor namespace”.
+
+*		"psr-4":{
+			"AppPsr4\\": "app/AppPsr4"
+		}
+"AppPsr4\\" - DIR NAME | "app/AppPsr4"	- PATH OF THE DI	
+	
+*The class name and the filename must be same.	
